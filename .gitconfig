@@ -1,0 +1,60 @@
+[core]
+	logAllRefUpdates = true
+
+[merge]
+	summary = true
+
+[alias]
+	b = branch
+	ba = branch -av
+	bl = blame -C -C -C -n
+	ci = commit
+	cl = clone
+	co = checkout
+	cp = cherry-pick
+	d = diff -C
+	dc = diff --cached -C
+	dh = diff -C HEAD
+	ds = diff --stat -C
+	fp = format-patch -C
+	hc = add --interactive
+	l = log -C
+	lp = log -p -C
+	m = merge
+	p = pull
+	pub = push
+	rb = rebase
+	rl = reflog
+	s = show -C
+	sm = submodule
+	sms = submodule summary
+	smu = submodule update --init
+	ss = show --stat -C
+	st = status
+	tg = !tig
+	tga = !tig -- --all
+	ui = update-index
+	up = pull origin
+	wh = log --no-merges @{1}..
+	whp = log -p -C --no-merges @{1}..
+	view = !gitk --all&
+	f = fetch
+	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+	g = grep -n
+	gg = grep -n -C3
+	lg = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --date=short
+
+
+[color]
+	branch = yes
+	status = auto
+	diff = auto
+	ui = auto
+
+[user]
+	name = Matthias Kestenholz
+	email = mk@spinlock.ch
+[push]
+	default = matching
+[rerere]
+    enabled = true
