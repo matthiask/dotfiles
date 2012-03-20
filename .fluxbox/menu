@@ -1,0 +1,11 @@
+[begin] (Unsocialbox)
+[exec] (Google Chrome) {/usr/bin/google-chrome}
+[exec] (Firefox) {/usr/bin/firefox}
+[exec] (VirtualBox) {/usr/bin/virtualbox}
+[exec] (Terminal) {/usr/bin/gnome-terminal --window}
+[exec] (Nautilus) {/usr/bin/nautilus}
+[exec] (Thunderbird) {/usr/bin/thunderbird}
+[submenu] (System) {}
+  [include] (/etc/X11/fluxbox/fluxbox-menu)
+[end]
+[end]
