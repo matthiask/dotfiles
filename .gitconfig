@@ -43,6 +43,7 @@
 	g = grep -n
 	gg = grep -n -C3
 	lg = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --date=short
+	todo = grep -n -C3 -E '(XXX|TODO|FIXME)'
 
 
 [color]
