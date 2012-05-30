@@ -39,6 +39,7 @@
 	whp = log -p -C --no-merges @{1}..
 	view = !gitk --all&
 	f = fetch
+	fat = fetch --all --tags
 	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 	g = grep -n
 	gg = grep -n -C3
