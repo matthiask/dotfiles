@@ -1,3 +1,5 @@
+execute pathogen#infect()
+
 syntax on
 set autoindent
 set autowrite
@@ -15,7 +17,6 @@ set tabstop=8
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 filetype plugin indent on
-set background=dark
 
 map <C-H> <C-W>h<C-W>_
 map <C-J> <C-W>j<C-W>_
@@ -24,3 +25,7 @@ map <C-L> <C-W>l<C-W>_
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=blue
+set background=dark
+colorscheme solarized
+set guifont=Inconsolata\ Medium\ 10
+set guioptions=aegimt
