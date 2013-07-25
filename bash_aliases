@@ -14,6 +14,7 @@ alias ........='cd ../../../../../../..'
 
 alias xopen='xdg-open'
 
+export PS1='\u@\h:\w$ '
 export EDITOR=vim
 alias m='python -Wall manage.py'
 alias mds='python -Wall manage.py runserver --traceback 0.0.0.0:8038'
