@@ -25,6 +25,6 @@ map <C-L> <C-W>l<C-W>_
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=blue
-set background=dark
+" set background=dark
 set guifont=Inconsolata\ Medium\ 10
 set guioptions=aegimt
