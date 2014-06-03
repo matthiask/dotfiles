@@ -19,3 +19,8 @@ export EDITOR=vim
 alias m='python -Wall manage.py'
 alias mds='python -Wall manage.py runserver --traceback 0.0.0.0:8038'
 alias gvir='gvim --remote'
+
+if [ -f ~/_dotfiles/git-completion.bash ]
+then
+    . ~/_dotfiles/git-completion.bash
+fi
