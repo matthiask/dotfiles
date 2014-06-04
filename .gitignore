@@ -1,0 +1,4 @@
+/.pip/cache
+/.pip/pip.log
+/.vim/.netrwhist
+.DS_Store
