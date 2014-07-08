@@ -35,3 +35,5 @@ if [ -f ~/_dotfiles/git-completion.bash ]
 then
     . ~/_dotfiles/git-completion.bash
 fi
+
+export PATH=~/_dotfiles/bin/:$PATH

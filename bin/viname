@@ -1,0 +1,106 @@
+#! /bin/sh
+#
+# viname - rename files using vi ;-)
+# $Id: viname,v 1.9 2004/07/19 14:41:17 hotti Exp $
+#
+# Copyright (c) Daniel Hottinger <hodaniel@student.ethz.ch>
+# Released under the terms of the GNU General Public License v2 or later
+#
+# Created: Mon Jul 23 15:25:08 CEST 2001
+# Last change: Sun Sep 14 11:30:54 PDT 2008
+# Todo:
+#   - rmdir -p old, empty directorys (ask user!)
+#   - " foo.txt" -> read name -> "foo.txt"
+# Changes:
+#   [2004-06-17] back to /bin/sh. wrote better code
+#   [2002-12-28] this is actually a bash-script
+#   [2002-03-23] use /usr/bin/vi if $EDITOR is not set
+
+set -e
+
+EXT="$PPID.$$"
+OLD=`mktemp || echo /tmp/viname.$EXT.old`
+NEW=`mktemp || echo /tmp/viname.$EXT.new`
+
+error() {
+    echo "interrupt" >&2
+    exit 1
+}
+
+sig_exit() {
+    rm $OLD $NEW
+}
+
+trap "error" HUP INT QUIT TERM
+trap "sig_exit" EXIT
+
+case "$1" in
+    -h|--help|"")
+	echo "Usage: viname Files You Want To Rename"
+	echo "       viname -i filelist"
+	echo "       viname -e command"
+	echo "       viname -r directory"
+	echo "		 rename all files in directory"
+	echo
+	echo "Then edit the Filenames in your favorite editor."
+	echo "After exiting, the files are renamed according to"
+	echo "their new name in the file."
+	echo "Be careful not to delete or insert new lines, exept"
+	echo "you really know, what you're doing ;)"
+	echo "Directories cannot be renamed. If you do so, new"
+	echo "directories will be created and the old ones will"
+	echo "be kept."
+	echo
+	echo "e.g. viname -e 'find -name *&*'"
+	exit 0
+	;;
+    -i)
+	cat "$2" > $OLD
+	;;
+    -e)
+	$2 > $OLD
+	;;
+    -r)
+	shift
+	while [ ! -z "$1" ]; do
+	    find "$1" -type f
+	    shift
+	done | sort > $OLD
+	;;
+    *)
+	while [ ! -z "$1" ] ; do
+	    echo "$1" >> $OLD
+	    shift
+	done
+	;;
+esac
+
+cp $OLD $NEW
+
+${VISUAL:-${EDITOR:-/usr/bin/vi}} $NEW
+
+if ! [ $NEW -nt $OLD ]
+then
+    echo abort
+    exit
+fi
+
+while read FILE # from $OLD
+do
+    mv -- "$FILE" "$FILE".$EXT
+done < $OLD
+
+exec 0< $OLD
+exec 3< $NEW
+
+while read OLDFILE
+do
+    read NEWFILE <&3
+    if [ -f "$NEWFILE" ]; then
+	echo "Cannot rename '$OLDFILE.$EXT' to '$NEWFILE': file exists"
+    else
+	NEWDIR=`dirname "$NEWFILE"`
+	[ ! -d "$NEWDIR" ] && mkdir -p "$NEWDIR"
+	mv -- "$OLDFILE".$EXT "$NEWFILE"
+    fi
+done
