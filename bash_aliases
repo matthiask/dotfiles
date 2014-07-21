@@ -24,7 +24,7 @@ xterm*|rxvt*)
 esac
 
 export EDITOR=vim
-export PATH=/usr/local/bin:$PATH
+export PATH=~/_dotfiles/bin:/usr/local/bin:$PATH
 export PGDATA=/usr/local/var/postgres
 
 alias m='python -Wall manage.py'
@@ -35,5 +35,3 @@ if [ -f ~/_dotfiles/git-completion.bash ]
 then
     . ~/_dotfiles/git-completion.bash
 fi
-
-export PATH=~/_dotfiles/bin/:$PATH
