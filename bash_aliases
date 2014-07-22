@@ -26,6 +26,7 @@ esac
 export EDITOR=vim
 export PATH=~/_dotfiles/bin:/usr/local/bin:$PATH
 export PGDATA=/usr/local/var/postgres
+export PYTHONWARNINGS=always
 
 alias m='python -Wall manage.py'
 alias mds='python -Wall manage.py runserver --traceback 0.0.0.0:8038'
