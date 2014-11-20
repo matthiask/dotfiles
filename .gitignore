@@ -2,3 +2,4 @@
 /.pip/pip.log
 /.vim/.netrwhist
 .DS_Store
+*.sw?
