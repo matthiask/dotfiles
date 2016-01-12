@@ -32,6 +32,8 @@ alias m='venv/bin/python -Wall manage.py'
 alias mds='python -Wall manage.py runserver --traceback 0.0.0.0:8038'
 alias gvir='gvim --remote'
 
+function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
+
 if [ -f ~/_dotfiles/git-completion.bash ]
 then
     . ~/_dotfiles/git-completion.bash
