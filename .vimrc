@@ -28,3 +28,5 @@ highlight ColorColumn ctermbg=blue
 " set background=dark
 set guifont=Inconsolata\ Medium\ 10
 set guioptions=aegimt
+
+execute pathogen#infect()
