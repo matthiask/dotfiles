@@ -1,4 +1,5 @@
 execute pathogen#infect()
+let g:vimfiler_as_default_explorer = 1
 
 syntax on
 set autoindent
@@ -28,5 +29,3 @@ highlight ColorColumn ctermbg=blue
 " set background=dark
 set guifont=Inconsolata\ Medium\ 10
 set guioptions=aegimt
-
-execute pathogen#infect()
