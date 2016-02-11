@@ -29,3 +29,7 @@ highlight ColorColumn ctermbg=blue
 " set background=dark
 set guifont=Inconsolata\ Medium\ 10
 set guioptions=aegimt
+
+set backspace=indent,eol,start
+
+let g:vimfiler_ignore_pattern = ['pyc$', '^\.DS_Store$', '^__pycache__$']
