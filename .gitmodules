@@ -4,3 +4,6 @@
 [submodule ".vim/bundle/unite.vim"]
 	path = .vim/bundle/unite.vim
 	url = https://github.com/Shougo/unite.vim.git
+[submodule ".vim/bundle/editorconfig.vim"]
+	path = .vim/bundle/editorconfig.vim
+	url = https://github.com/editorconfig/editorconfig-vim.git
