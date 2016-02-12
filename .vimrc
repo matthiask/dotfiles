@@ -33,6 +33,6 @@ set guioptions=aegimt
 set backspace=indent,eol,start
 
 let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_ignore_pattern = ['pyc$', '^\.DS_Store$', '^__pycache__$', '^\.git$', '\.sw.$']
+let g:vimfiler_ignore_pattern = ['pyc$', '^\.DS_Store$', '^__pycache__$', '^\.git$', '\.sw.$', '^venv$']
 
 map <C-E> :VimFilerExplorer<CR>
