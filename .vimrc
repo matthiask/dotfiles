@@ -15,14 +15,13 @@ set showmatch
 set smartcase
 set softtabstop=4
 set tabstop=8
+" Strip trailing whitespace before saving, always
 autocmd BufWritePre * :%s/\s\+$//e
+" Restore cursor position
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" ... except when entering git commit messages
+autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
 filetype plugin indent on
-
-map <C-H> <C-W>h<C-W>_
-map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
-map <C-L> <C-W>l<C-W>_
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=blue
