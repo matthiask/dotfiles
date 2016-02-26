@@ -39,3 +39,13 @@ let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_ignore_pattern = ['pyc$', '^\.DS_Store$', '^__pycache__$', '^\.git$', '\.sw.$', '^venv$', '^\.bundle$', '^\.tox$']
 
 map <C-E> :VimFilerExplorer<CR>
+
+" No training wheels
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
