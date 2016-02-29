@@ -11,7 +11,6 @@ set mouse=a
 set number
 set shiftwidth=4
 set showcmd
-set showmatch
 set smartcase
 set softtabstop=4
 set tabstop=8
