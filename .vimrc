@@ -17,6 +17,7 @@ set tabstop=8
 set colorcolumn=80
 highlight ColorColumn ctermbg=gray
 set backspace=indent,eol,start
+set encoding=utf-8
 
 " Strip trailing whitespace before saving, always
 autocmd BufWritePre * :%s/\s\+$//e
