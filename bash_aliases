@@ -28,6 +28,8 @@ export PATH=~/_dotfiles/bin:/usr/local/bin:$PATH
 export PGDATA=/usr/local/var/postgres
 export PYTHONWARNINGS=always
 export PYTHONHASHSEED=random
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 alias m='venv/bin/python -Wall manage.py'
 alias mds='python -Wall manage.py runserver --traceback 0.0.0.0:8038'
