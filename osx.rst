@@ -11,3 +11,5 @@ general.useragent.locale
 
 Ukulele
 http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=ukelele
+
+.metadata_never_index
