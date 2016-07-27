@@ -26,7 +26,7 @@ esac
 export EDITOR=vim
 export PATH=~/_dotfiles/bin:/usr/local/bin:$PATH
 export PGDATA=/usr/local/var/postgres
-export PYTHONWARNINGS=always
+export PYTHONWARNINGS=once
 export PYTHONHASHSEED=random
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
