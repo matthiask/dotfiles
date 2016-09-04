@@ -33,7 +33,7 @@ autocmd BufReadPost * call PositionCursorFromViminfo()
 
 filetype plugin indent on
 
-" set background=dark
+set background=dark
 
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_ignore_pattern = ['pyc$', '^\.DS_Store$', '^__pycache__$', '^\.git$', '\.sw.$', '^venv$', '^\.bundle$', '^\.tox$']
@@ -49,3 +49,7 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+
+let g:hybrid_custom_term_colors = 1
+" let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+colorscheme hybrid
