@@ -36,7 +36,7 @@ filetype plugin indent on
 set background=dark
 
 let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_ignore_pattern = ['pyc$', '^\.DS_Store$', '^__pycache__$', '^\.git$', '\.sw.$', '^\.bundle$', '^\.tox$']
+let g:vimfiler_ignore_pattern = ['pyc$', '^\.DS_Store$', '^__pycache__$', '^\.git$', '\.sw.$', '^\.bundle$', '^\.tox$', '^\.$', '^\.\.$']
 
 map <C-E> :VimFilerExplorer<CR>
 
