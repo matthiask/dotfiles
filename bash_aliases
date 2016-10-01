@@ -23,9 +23,9 @@ xterm*|rxvt*)
     ;;
 esac
 
-export EDITOR=vim
 export PATH=~/_dotfiles/bin:/usr/local/bin:$PATH
 export PGDATA=/usr/local/var/postgres
+export EDITOR=vim
 export PYTHONWARNINGS=once
 export PYTHONHASHSEED=random
 export LC_ALL=en_US.UTF-8

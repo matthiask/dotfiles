@@ -7,3 +7,6 @@
 [submodule ".vim/bundle/editorconfig.vim"]
 	path = .vim/bundle/editorconfig.vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule ".vim/bundle/jellybeans.vim"]
+	path = .vim/bundle/jellybeans.vim
+	url = https://github.com/nanotech/jellybeans.vim
