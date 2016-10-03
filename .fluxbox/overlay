@@ -1,9 +1,0 @@
-! The following line will prevent styles from setting the background.
-! background: none
-
-*font: Sans-9
-
-toolbar.height: 15
-menu.itemHeight: 16
-menu.titleHeight: 16
-window.title.height: 16
