@@ -33,8 +33,6 @@ autocmd BufReadPost * call PositionCursorFromViminfo()
 
 filetype plugin indent on
 
-set background=dark
-
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_ignore_pattern = ['pyc$', '^\.DS_Store$', '^__pycache__$', '^\.git$', '\.sw.$', '^\.bundle$', '^\.tox$', '^\.$', '^\.\.$']
 
@@ -54,7 +52,9 @@ map <C-E> :VimFilerExplorer<CR>
 " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 " colorscheme hybrid
 
-colorscheme jellybeans
+" colorscheme jellybeans
+set background=light
+colorscheme hybrid
 
 set guioptions=acegimt
 set backupcopy=yes  " for webpack-dev-server
