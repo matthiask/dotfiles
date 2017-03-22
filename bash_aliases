@@ -28,6 +28,7 @@ export PGDATA=/usr/local/var/postgres
 export EDITOR=vim
 export PYTHONWARNINGS=once
 export PYTHONHASHSEED=random
+export PYTHONSTARTUP=~/_dotfiles/pythonstartup.py
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
