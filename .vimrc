@@ -15,7 +15,7 @@ set smartcase
 set softtabstop=4
 set tabstop=8
 set colorcolumn=80
-highlight ColorColumn ctermbg=gray
+highlight ColorColumn ctermbg=lightgray
 set backspace=indent,eol,start
 set encoding=utf-8
 
@@ -54,7 +54,8 @@ map <C-E> :VimFilerExplorer<CR>
 
 " colorscheme jellybeans
 set background=light
-colorscheme hybrid
+colorscheme lucius
+LuciusLight
 
 set guioptions=acegimt
 set backupcopy=yes  " for webpack-dev-server
