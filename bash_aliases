@@ -1,5 +1,3 @@
-# some more ls aliases
-
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -33,7 +31,6 @@ then
     . ~/_dotfiles/git-completion.bash
 fi
 
-KERNEL=$(uname -s)
 case "$(uname -s)" in
 Darwin*)
     alias xopen=open
