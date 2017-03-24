@@ -58,5 +58,12 @@ colorscheme lucius
 LuciusLight
 
 set guioptions=acegimt
-set backupcopy=yes  " for webpack-dev-server
-set directory=/dev/shm/
+
+if has("unix")
+  if has("mac") || has("macunix")
+    set directory=/tmp/
+  else
+    set directory=/dev/shm/
+    set backupcopy=yes  " for webpack-dev-server
+  endif
+endif
