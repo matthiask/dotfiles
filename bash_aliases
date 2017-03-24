@@ -25,8 +25,8 @@ export PYTHONSTARTUP=~/_dotfiles/pythonstartup.py
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-alias m='venv/bin/python -Wall manage.py'
-alias mds='python -Wall manage.py runserver --traceback 0.0.0.0:8038'
+alias m='venv/bin/python manage.py'
+alias mds='python manage.py runserver --traceback 0.0.0.0:8038'
 
 if [ -f ~/_dotfiles/git-completion.bash ]
 then
