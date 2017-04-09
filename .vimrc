@@ -31,6 +31,9 @@ function! PositionCursorFromViminfo()
 endfunction
 autocmd BufReadPost * call PositionCursorFromViminfo()
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 filetype plugin indent on
 
 let g:vimfiler_as_default_explorer = 1
