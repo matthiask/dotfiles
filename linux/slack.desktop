@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Slack
+Comment=Slack launcher
+Icon=/home/matthias/_dotfiles/linux/slack.png
+Exec=/usr/bin/google-chrome --app="https://feinheit.slack.com/messages"
+Terminal=false

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Metronom
+Comment=Metronom M2 launcher
+Icon=/usr/share/icons/gnome/256x256/actions/stock_new-appointment.png
+Exec=/usr/bin/google-chrome --app="https://metronom.feinheit.ch/m2/"
+Terminal=false
