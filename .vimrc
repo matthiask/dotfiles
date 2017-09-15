@@ -65,6 +65,7 @@ set guioptions=acegimt
 if has("unix")
   if has("mac") || has("macunix")
     set directory=/tmp/
+    " set backupcopy=yes  " for react-native?
   else
     set directory=/dev/shm/
     set backupcopy=yes  " for webpack-dev-server
