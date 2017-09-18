@@ -58,7 +58,7 @@ map <C-E> :VimFilerExplorer<CR>
 " colorscheme jellybeans
 set background=dark
 colorscheme lucius
-LuciusDark
+LuciusDarkHighContrast
 
 set guioptions=acegimt
 

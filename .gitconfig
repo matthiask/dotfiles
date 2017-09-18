@@ -46,7 +46,6 @@
 	lg = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --date=short
 	todo = grep -n -C3 -E '(XXX|TODO|FIXME)'
 
-
 [color]
 	branch = yes
 	status = auto
@@ -56,7 +55,9 @@
 [user]
 	name = Matthias Kestenholz
 	email = mk@feinheit.ch
+
 [push]
 	default = matching
+
 [rerere]
-    enabled = true
+	default = matching
