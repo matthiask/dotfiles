@@ -25,6 +25,7 @@ export LANG=en_US.UTF-8
 
 alias m='venv/bin/python manage.py'
 alias mds='python manage.py runserver --traceback 0.0.0.0:8038'
+alias fixdns='echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf'
 
 if [ -f ~/_dotfiles/git-completion.bash ]
 then
