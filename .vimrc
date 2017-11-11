@@ -71,3 +71,8 @@ if has("unix")
     set backupcopy=yes  " for webpack-dev-server
   endif
 endif
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
