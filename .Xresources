@@ -35,4 +35,7 @@ URxvt*color14:      #8abeb7
 URxvt*color7:       #707880
 URxvt*color15:      #c5c8c6
 
-URxvt*font:	xft:Inconsolata:size=10
+URxvt*font:         xft:Inconsolata:size=10
+URxvt*scrollBar:    false
+URxvt*iso14755:     false
+URxvt.perl-ext-common: selection-to-clipboard
