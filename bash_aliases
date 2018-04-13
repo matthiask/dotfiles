@@ -31,6 +31,10 @@ function tm() {
     tmux -2 new-session -A -s "${1:-main}"
 }
 
+function fs() {
+    printf '\e]710;%s\007' "xft:Inconsolata:size=$1"
+}
+
 if [ -f ~/_dotfiles/git-completion.bash ]
 then
     . ~/_dotfiles/git-completion.bash
