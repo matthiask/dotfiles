@@ -1,7 +1,7 @@
 ! special
-URxvt*foreground:   #c5c8c6
+URxvt*foreground:   #d5d8d6
 URxvt*background:   #1d1f21
-URxvt*cURsorColor:  #c5c8c6
+URxvt*cursorColor:  #c5c8c6
 
 ! black
 URxvt*color0:       #282a2e
