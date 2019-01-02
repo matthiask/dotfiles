@@ -54,3 +54,7 @@ Linux*)
     alias xopen=xdg-open
     ;;
 esac
+
+if grep -q Microsoft /proc/version; then
+    umask 002
+fi
