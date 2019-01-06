@@ -56,17 +56,15 @@ map <C-E> :VimFilerExplorer<CR>
 " inoremap <left> <nop>
 " inoremap <right> <nop>
 
-" let g:hybrid_custom_term_colors = 1
-" let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-" colorscheme hybrid
-
-" colorscheme jellybeans
 set background=dark
+
 " let g:lucius_no_term_bg = 1
 " colorscheme lucius
 " LuciusDarkHighContrast
 
 set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 let g:nord_comment_brightness=12
 colorscheme nord
 
