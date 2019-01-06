@@ -1,4 +1,4 @@
-URxvt*font:         xft:Inconsolata:size=18
+URxvt*font:         xft:Inconsolata:size=12
 URxvt*scrollBar:    false
 URxvt*iso14755:     false
 URxvt.perl-ext-common: selection-to-clipboard
