@@ -63,8 +63,12 @@ map <C-E> :VimFilerExplorer<CR>
 " colorscheme jellybeans
 set background=dark
 " let g:lucius_no_term_bg = 1
-colorscheme lucius
-LuciusDarkHighContrast
+" colorscheme lucius
+" LuciusDarkHighContrast
+
+set termguicolors
+let g:nord_comment_brightness=12
+colorscheme nord
 
 set guioptions=acegimt
 

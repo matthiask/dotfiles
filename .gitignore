@@ -3,3 +3,4 @@
 /.vim/.netrwhist
 .DS_Store
 *.sw?
+/.tmux/plugins

@@ -13,3 +13,9 @@
 [submodule ".vim/bundle/vim-lucius"]
 	path = .vim/bundle/vim-lucius
 	url = https://github.com/jonathanfilip/vim-lucius
+[submodule ".vim/bundle/nord-vim.git"]
+	path = .vim/bundle/nord-vim.git
+	url = git@github.com:arcticicestudio/nord-vim.git
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
