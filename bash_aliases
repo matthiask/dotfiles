@@ -15,7 +15,7 @@ xterm*|rxvt*)
     ;;
 esac
 
-export PATH=~/_dotfiles/bin:/usr/local/bin:$PATH
+export PATH=~/bin:~/_dotfiles/bin:/usr/local/bin:$PATH
 export EDITOR=vim
 export PYTHONWARNINGS=once
 export PYTHONHASHSEED=random
