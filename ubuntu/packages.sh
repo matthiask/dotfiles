@@ -10,6 +10,6 @@ sudo apt install -y gettext vim-nox deborphan \
  python3-venv python3-pip python-pip virtualenv twine tox \
  redis-server postgresql postgresql-client \
  x11-xserver-utils xfce4-terminal rxvt-unicode \
- fonts-inconsolata fonts-emojione yarn
+ fonts-inconsolata fonts-emojione yarn gitk git-gui whois
 
 sudo pip2 install -U fh-fablib
