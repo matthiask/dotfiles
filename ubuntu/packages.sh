@@ -11,6 +11,6 @@ sudo apt install -y gettext vim-nox deborphan \
  redis-server postgresql postgresql-client \
  x11-xserver-utils xfce4-terminal rxvt-unicode \
  fonts-inconsolata fonts-emojione yarn gitk git-gui whois \
- imagemagick
+ imagemagick apg
 
 sudo pip2 install -U fh-fablib
