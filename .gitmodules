@@ -7,15 +7,12 @@
 [submodule ".vim/bundle/editorconfig.vim"]
 	path = .vim/bundle/editorconfig.vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
-[submodule ".vim/bundle/vim-lucius"]
-	path = .vim/bundle/vim-lucius
-	url = https://github.com/jonathanfilip/vim-lucius
-[submodule ".vim/bundle/nord-vim.git"]
-	path = .vim/bundle/nord-vim.git
-	url = git@github.com:arcticicestudio/nord-vim.git
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
 [submodule ".vim/bundle/vim-airline"]
 	path = .vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline
+[submodule ".vim/bundle/vim-colors-solarized.git"]
+	path = .vim/bundle/vim-colors-solarized.git
+	url = git://github.com/altercation/vim-colors-solarized.git

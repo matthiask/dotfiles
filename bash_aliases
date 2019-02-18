@@ -35,10 +35,7 @@ function fs() {
     printf '\e]710;%s\007' "xft:Inconsolata:size=$1"
 }
 
-if [ -f ~/_dotfiles/git-completion.bash ]
-then
-    . ~/_dotfiles/git-completion.bash
-fi
+. /usr/share/bash-completion/completions/git
 
 case "$(uname -s)" in
 Darwin*)

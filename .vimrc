@@ -56,17 +56,12 @@ map <C-E> :VimFilerExplorer<CR>
 " inoremap <left> <nop>
 " inoremap <right> <nop>
 
-set background=dark
-
-" let g:lucius_no_term_bg = 1
-" colorscheme lucius
-" LuciusDarkHighContrast
-
+set background=light
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-let g:nord_comment_brightness=12
-colorscheme nord
+
+colorscheme solarized
 
 set guioptions=acegimt
 
