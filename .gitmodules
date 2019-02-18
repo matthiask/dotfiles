@@ -7,9 +7,6 @@
 [submodule ".vim/bundle/editorconfig.vim"]
 	path = .vim/bundle/editorconfig.vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
-[submodule ".tmux/plugins/tpm"]
-	path = .tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm
 [submodule ".vim/bundle/ayu-vim"]
 	path = .vim/bundle/ayu-vim
 	url = https://github.com/ayu-theme/ayu-vim
