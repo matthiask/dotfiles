@@ -10,9 +10,6 @@
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule ".vim/bundle/vim-airline"]
-	path = .vim/bundle/vim-airline
-	url = https://github.com/vim-airline/vim-airline
-[submodule ".vim/bundle/vim-colors-solarized.git"]
-	path = .vim/bundle/vim-colors-solarized.git
-	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule ".vim/bundle/ayu-vim"]
+	path = .vim/bundle/ayu-vim
+	url = https://github.com/ayu-theme/ayu-vim

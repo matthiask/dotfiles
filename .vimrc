@@ -56,15 +56,6 @@ map <C-E> :VimFilerExplorer<CR>
 " inoremap <left> <nop>
 " inoremap <right> <nop>
 
-set background=light
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-colorscheme solarized
-
-set guioptions=acegimt
-
 if has("unix")
   if has("mac") || has("macunix")
     set directory=/tmp/
@@ -79,3 +70,14 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+set background=light
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
+" colorscheme solarized
+" set guioptions=acegimt
+
+let ayucolor="light"
+colorscheme ayu
