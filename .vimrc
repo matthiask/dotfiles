@@ -24,6 +24,8 @@ set noerrorbells
 " set wildmode=longest:full,full
 set pastetoggle=<F2>
 
+nnoremap <F3> :set hlsearch! hlsearch?<CR>
+
 " Strip trailing whitespace before saving, always
 autocmd BufWritePre * :%s/\s\+$//e
 
