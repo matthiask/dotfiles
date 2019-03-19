@@ -45,6 +45,7 @@
 	gg = grep -n -C3
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(bold)%s%C(reset) %C(white)- %an%C(reset)%C(yellow)%d%C(reset)' --all
 	todo = grep -n -C3 -E '\\b(XXX|TODO|FIXME)\\b'
+	tags = log --oneline --decorate --tags --no-walk
 
 [color]
 	branch = yes
