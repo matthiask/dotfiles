@@ -10,3 +10,6 @@
 [submodule ".vim/bundle/vim-wwdc17-theme"]
 	path = .vim/bundle/vim-wwdc17-theme
 	url = https://github.com/lifepillar/vim-wwdc17-theme
+[submodule ".vim/bundle/cobalt2"]
+	path = .vim/bundle/cobalt2
+	url = https://github.com/herrbischoff/cobalt2.vim
