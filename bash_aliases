@@ -28,7 +28,7 @@ alias mds='venv/bin/python manage.py runserver --traceback 0.0.0.0:8000'
 alias fixdns='echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf'
 
 function tm() {
-    tmux -2 new-session -A -s "${1:-main}"
+    ssh-agent tmux -2 new-session -A -s "${1:-main}"
 }
 
 function fs() {
@@ -52,6 +52,7 @@ Linux*)
     ;;
 esac
 
-if grep -q Microsoft /proc/version; then
+if grep -qi Microsoft /proc/version; then
     umask 002
+    export DISPLAY=$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0
 fi
