@@ -1,0 +1,14 @@
+[workbench]
+# url = http://127.0.0.1:8000/create-timestamp/
+# user = mk@feinheit.ch:----
+url = https://workbench.feinheit.ch/create-timestamp/
+user = mk@feinheit.ch:----
+
+[projects]
+admin = 8220
+fmw = 8181
+wk = 8085
+web = 7892
+mpp = 7892
+hcd = 8089
+out = 8082
