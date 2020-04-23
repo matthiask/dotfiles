@@ -74,12 +74,15 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap Q <Nop>
 
-set background=dark
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
-" let g:wwdc17_term_italics = 0
-" let g:wwdc17_transp_bg = 1
-" colorscheme wwdc17
-colorscheme cobalt2
+set background=light
+let g:wwdc17_term_italics = 0
+let g:wwdc17_transp_bg = 1
+let g:wwdc17_frame_color = 12
+colorscheme wwdc17
+
+" set background=dark
+" colorscheme cobalt2
