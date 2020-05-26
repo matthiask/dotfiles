@@ -16,9 +16,12 @@
 	dc = diff --cached -C
 	dh = diff -C HEAD
 	ds = diff --stat -C
-	fp = format-patch -C
-	hc = add --interactive
+	f = fetch
+	fat = fetch --all --tags
+	g = grep -n
+	gg = grep -n -C3
 	l = log -C
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(bold)%s%C(reset) %C(white)- %an%C(reset)%C(yellow)%d%C(reset)' --all
 	lp = log -p -C
 	m = merge
 	p = pull
@@ -31,26 +34,13 @@
 	smu = submodule update --init
 	ss = show --stat -C
 	st = status
-	tg = !tig
-	tga = !tig -- --all
-	ui = update-index
-	up = pull origin
+	tags = log --oneline --decorate --tags --no-walk
+	todo = grep -n -C3 -E '\\b(XXX|TODO|FIXME)\\b'
+	view = !gitk --all&
 	wh = log --no-merges @{1}..
 	whp = log -p -C --no-merges @{1}..
-	view = !gitk --all&
-	f = fetch
-	fat = fetch --all --tags
-	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
-	g = grep -n
-	gg = grep -n -C3
-	lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(bold)%s%C(reset) %C(white)- %an%C(reset)%C(yellow)%d%C(reset)' --all
-	todo = grep -n -C3 -E '\\b(XXX|TODO|FIXME)\\b'
-	tags = log --oneline --decorate --tags --no-walk
 
 [color]
-	branch = yes
-	status = auto
-	diff = auto
 	ui = auto
 
 [user]
@@ -62,3 +52,6 @@
 
 [rerere]
 	default = matching
+
+[url "ssh://git@heroku.com/"]
+	insteadOf = https://git.heroku.com/
