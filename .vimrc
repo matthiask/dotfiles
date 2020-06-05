@@ -3,6 +3,7 @@ Helptags
 
 syntax on
 set autoindent
+set autoread
 set autowrite
 set expandtab
 set hidden
@@ -87,3 +88,5 @@ colorscheme wwdc17
 
 " set background=dark
 " colorscheme cobalt2
+
+set wildignore+=*/tmp/*,*/node_modules/*,*.pyc,*/venv/*
