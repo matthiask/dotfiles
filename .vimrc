@@ -3,6 +3,7 @@ Helptags
 
 syntax on
 set autoindent
+set autoread
 set autowrite
 set expandtab
 set hidden
