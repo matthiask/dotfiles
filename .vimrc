@@ -86,3 +86,5 @@ colorscheme wwdc17
 
 " set background=dark
 " colorscheme cobalt2
+
+set wildignore+=*/tmp/*,*/node_modules/*,*.pyc,*/venv/*
