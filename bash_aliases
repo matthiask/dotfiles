@@ -6,7 +6,7 @@ alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
 alias ........='cd ../../../../../../..'
 
-PS1="\[\e[32m\][\D{%d.%m. %H:%M}]\[\e[m\] \[\e]0;\w\a\]\[\033[01;34m\]\w\[\033[00m\]\$ "
+PS1="\[\e[32m\][\D{%d.%m. %H:%M:%S}]\[\e[m\] \[\e]0;\w\a\]\[\033[01;34m\]\w\[\033[00m\]\$ "
 
 export PATH=~/bin:~/_dotfiles/bin:/usr/local/bin:$PATH
 export EDITOR=vim
