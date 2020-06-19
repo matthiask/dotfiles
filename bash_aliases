@@ -6,14 +6,7 @@ alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
 alias ........='cd ../../../../../../..'
 
-PS1='\[\033[01;34m\]\w\[\033[00m\]\$ '
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;\w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+PS1="\[\e[32m\][\D{%d.%m. %H:%M}]\[\e[m\] \[\e]0;\w\a\]\[\033[01;34m\]\w\[\033[00m\]\$ "
 
 export PATH=~/bin:~/_dotfiles/bin:/usr/local/bin:$PATH
 export EDITOR=vim
