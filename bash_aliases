@@ -28,6 +28,10 @@ function fs() {
     printf '\e]710;%s\007' "xft:Inconsolata:size=$1"
 }
 
+function srv() {
+    python3 -m http.server "${1:-8001}"
+}
+
 . /usr/share/bash-completion/completions/git
 
 case "$(uname -s)" in
