@@ -88,7 +88,7 @@ set termguicolors
 set background=dark
 colorscheme cobalt2
 
-set wildignore+=*/tmp/*,*/node_modules/*,*.pyc
+set wildignore+=*/tmp/*,*/node_modules/*,*.pyc,*.mo,*.whl
 
 " Triger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
