@@ -21,6 +21,7 @@ set backspace=indent,eol,start
 set encoding=utf-8
 set scrolloff=3  " context lines above and below cursor
 set noerrorbells
+set visualbell
 " set wildmenu
 " set wildmode=longest:full,full
 set pastetoggle=<F2>
