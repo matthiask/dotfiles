@@ -88,7 +88,8 @@ set termguicolors
 set background=dark
 colorscheme cobalt2
 
-set wildignore+=*/tmp/*,*/node_modules/*,*.pyc,*/venv/*
+set wildignore+=*/tmp/*,*/node_modules/*,*.pyc
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Triger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
