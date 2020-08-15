@@ -88,7 +88,7 @@ set termguicolors
 set background=dark
 colorscheme cobalt2
 
-set wildignore+=*/tmp/*,*/node_modules/*,*.pyc
+set wildignore+=*/tmp/*,*/node_modules/*,*.pyc,*.mo,*.whl
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Triger `autoread` when files changes on disk
