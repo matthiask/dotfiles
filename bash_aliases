@@ -11,7 +11,6 @@ PS1="\[\e[32m\][\D{%d.%m. %H:%M:%S}]\[\e[m\] \[\e]0;\w\a\]\[\033[01;34m\]\w\[\03
 export PATH=~/bin:~/_dotfiles/bin:/usr/local/bin:$PATH
 export EDITOR=vim
 export PIP_REQUIRE_VIRTUALENV=true
-export PYTHONWARNINGS=once
 export PYTHONHASHSEED=random
 export PYTHONSTARTUP=~/_dotfiles/pythonstartup.py
 export LC_ALL=en_US.UTF-8
