@@ -34,6 +34,7 @@
 	smu = submodule update --init
 	ss = show --stat -C
 	st = status
+        sync = !git pull --no-edit && git push
 	tags = log --oneline --decorate --tags --no-walk
 	todo = grep -n -C3 -E '\\b(XXX|TODO|FIXME)\\b'
 	view = !gitk --all&
