@@ -47,6 +47,7 @@
 [user]
 	name = Matthias Kestenholz
 	email = mk@feinheit.ch
+	signingkey = 9344937529B41ED56141194C0C3F200EF349129F
 
 [push]
 	default = matching
