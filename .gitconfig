@@ -37,6 +37,7 @@
         sync = !git pull --no-edit && git push
 	tags = log --oneline --decorate --tags --no-walk
 	todo = grep -n -C3 -E '\\b(XXX|TODO|FIXME)\\b'
+	tst = log --since='01:00' --date='format:%H:%M' --reverse --pretty='format:tst stop %ad \"%s\"'
 	view = !gitk --all&
 	wh = log --no-merges @{1}..
 	whp = log -p -C --no-merges @{1}..

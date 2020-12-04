@@ -33,10 +33,6 @@ function srv() {
     python3 -m http.server "${1:-8001}"
 }
 
-function gitst() {
-    eval $(git log --since="06:00" --date="format:%H:%M" --pretty="format:tst stop %ad '%s';")
-}
-
 . /usr/share/bash-completion/completions/git
 
 case "$(uname -s)" in
