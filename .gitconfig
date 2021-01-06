@@ -17,6 +17,7 @@
 	dh = diff -C HEAD
 	ds = diff --stat -C
 	f = fetch
+	ff = pull --ff-only
 	fat = fetch --all --tags
 	g = grep -n
 	gg = grep -n -C3
