@@ -26,7 +26,7 @@
 	lp = log -p -C
 	m = merge
 	p = pull
-	pub = push
+	pub = "!git push origin HEAD~0:refs/heads/\"$1\" #"
 	rb = rebase
 	rl = reflog
 	s = show -C
