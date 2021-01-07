@@ -29,6 +29,8 @@
 	pub = "!git push origin HEAD~0:refs/heads/\"$1\" #"
 	rb = rebase
 	rl = reflog
+	rp = remote prune
+	rpo = remote prune origin
 	s = show -C
 	sm = submodule
 	sms = submodule summary
