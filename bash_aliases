@@ -54,3 +54,4 @@ if grep -qi Microsoft /proc/version; then
     umask 002
     export DISPLAY=$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0
 fi
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
