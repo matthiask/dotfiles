@@ -1,8 +1,8 @@
 [core]
 	logAllRefUpdates = true
 
-[merge]
-	summary = true
+[init]
+	defaultBranch = main
 
 [alias]
 	b = branch
@@ -56,10 +56,14 @@
 [push]
 	default = matching
 
+[pull]
+	rebase = false
+
 [rerere]
 	default = matching
 
 [url "ssh://git@heroku.com/"]
 	insteadOf = https://git.heroku.com/
-[init]
-	defaultBranch = main
+
+[merge]
+	summary = true
