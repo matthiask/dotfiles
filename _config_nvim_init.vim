@@ -16,7 +16,8 @@ call plug#end()
 
 set termguicolors
 set background=dark
-colorscheme cobalt2
+" colorscheme cobalt2
+colorscheme dracula
 
 set directory=/dev/shm/
 set backupcopy=yes " for webpack-dev-server
