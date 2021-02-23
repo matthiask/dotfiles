@@ -7,7 +7,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dracula/vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'herrbischoff/cobalt2.vim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
