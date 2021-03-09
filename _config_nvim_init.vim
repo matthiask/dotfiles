@@ -60,6 +60,7 @@ set visualbell
 " set wildmenu
 " set wildmode=longest:full,full
 set pastetoggle=<F2>
+nnoremap <F3> :set hlsearch! hlsearch?<CR>
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
