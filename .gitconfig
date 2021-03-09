@@ -25,6 +25,7 @@
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(bold)%s%C(reset) %C(white)- %an%C(reset)%C(yellow)%d%C(reset)' --all
 	lp = log -p -C
 	m = merge
+	mainfix = symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
 	p = pull
 	pub = "!git push origin HEAD~0:refs/heads/\"$1\" #"
 	rb = rebase
