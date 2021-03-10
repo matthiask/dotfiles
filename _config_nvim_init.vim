@@ -7,7 +7,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dracula/vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'herrbischoff/cobalt2.vim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -60,6 +60,7 @@ set visualbell
 " set wildmenu
 " set wildmode=longest:full,full
 set pastetoggle=<F2>
+nnoremap <F3> :set hlsearch! hlsearch?<CR>
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
