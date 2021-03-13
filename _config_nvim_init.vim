@@ -19,7 +19,11 @@ set background=dark
 " colorscheme cobalt2
 colorscheme dracula
 
-set directory=/dev/shm/
+if has('macunix')
+    set directory=/tmp/
+else
+    set directory=/dev/shm/
+endif
 set backupcopy=yes " for webpack-dev-server
 set mouse=a
 
