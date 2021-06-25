@@ -45,6 +45,7 @@
 	view = !gitk --all&
 	wh = log --no-merges @{1}..
 	whp = log -p -C --no-merges @{1}..
+	fpf = "!echo -n 'git push -v origin '; git for-each-ref --format='%(refname)' 'refs/heads/mk/*'|sed -e s#^refs/heads/#+#|tr '\n' ' '; echo"
 
 [color]
 	ui = auto
