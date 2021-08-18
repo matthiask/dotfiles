@@ -66,7 +66,7 @@ set visualbell
 " set wildmode=longest:full,full
 set pastetoggle=<F2>
 nnoremap <F3> :set hlsearch! hlsearch?<CR>
-nnoremap <F4> :CHADopen<cr><C-W>=
+nnoremap <F4> :CHADopen --version-ctl<cr><C-W>=
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
