@@ -11,6 +11,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'herrbischoff/cobalt2.vim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 call plug#end()
 
@@ -65,6 +66,7 @@ set visualbell
 " set wildmode=longest:full,full
 set pastetoggle=<F2>
 nnoremap <F3> :set hlsearch! hlsearch?<CR>
+nnoremap <F4> :CHADopen<cr><C-W>=
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
