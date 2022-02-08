@@ -21,7 +21,9 @@ alias mds='venv/bin/python -Wonce manage.py runserver --traceback 0.0.0.0:8000'
 alias fixdns='echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf'
 
 function tm() {
-    ssh-agent tmux -2 new-session -A -s "${1:-main}"
+    eval `ssh-agent -s`
+    ssh-add
+    tmux -2 new-session -A -s "${1:-main}"
 }
 
 function fs() {
