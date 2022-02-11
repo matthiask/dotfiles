@@ -59,6 +59,7 @@
 
 [push]
 	default = matching
+	followTags = true
 
 [pull]
 	rebase = false
