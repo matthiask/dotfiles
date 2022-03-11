@@ -51,7 +51,7 @@ set showcmd
 set smartcase
 set softtabstop=4
 set tabstop=8
-set colorcolumn=80
+" set colorcolumn=80
 highlight ColorColumn ctermbg=lightgray
 set backspace=indent,eol,start
 set encoding=utf-8
