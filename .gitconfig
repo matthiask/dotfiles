@@ -22,7 +22,7 @@
 	g = grep -n
 	gg = grep -n -C3
 	l = log -C
-	lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(bold)%s%C(reset) %C(white)- %an%C(reset)%C(yellow)%d%C(reset)' --all
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(bold)%s%C(reset) %C(white)- %an%C(reset)%C(cyan)%d%C(reset)' --all
 	lp = log -p -C
 	m = merge
 	mainfix = remote set-head origin --auto
