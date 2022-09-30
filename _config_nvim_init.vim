@@ -54,7 +54,7 @@ set smartcase
 set softtabstop=4
 set tabstop=8
 " set colorcolumn=80
-highlight ColorColumn ctermbg=lightgray
+" highlight ColorColumn ctermbg=lightgray
 set backspace=indent,eol,start
 set encoding=utf-8
 set scrolloff=3  " context lines above and below cursor
@@ -64,12 +64,9 @@ set visualbell
 " set wildmode=longest:full,full
 set pastetoggle=<F2>
 nnoremap <F3> :set hlsearch! hlsearch?<CR>
-nnoremap <F4> :CHADopen --version-ctl<cr><C-W>=
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap Q <Nop>
-
-nnoremap <F5> :mode<CR>
