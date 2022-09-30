@@ -9,12 +9,14 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'editorconfig/editorconfig-vim'
+Plug 'protesilaos/tempus-themes-vim'
 
 call plug#end()
 
 set termguicolors
-set background=dark
-colorscheme dracula
+set background=light
+let g:tempus_enforce_background_color=1
+colorscheme tempus_totus
 
 if has('macunix')
     set directory=/tmp/
