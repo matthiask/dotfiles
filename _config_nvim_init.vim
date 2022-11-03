@@ -14,9 +14,9 @@ Plug 'protesilaos/tempus-themes-vim'
 call plug#end()
 
 set termguicolors
-set background=light
+set background=dark
 let g:tempus_enforce_background_color=1
-colorscheme tempus_totus
+colorscheme tempus_night
 
 if has('macunix')
     set directory=/tmp/
