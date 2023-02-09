@@ -45,8 +45,8 @@
 	view = !gitk --all&
 	wh = log --no-merges @{1}..
 	whp = log -p -C --no-merges @{1}..
-	fbpush = "!git push -v origin --force-with-lease $(git for-each-ref --format='%(refname)' 'refs/heads/mk/*'|sed -e s#^refs/heads/##|tr '\n' ' ')"
-	fbrm = "!git branch -D $(git for-each-ref --format='%(refname)' 'refs/heads/mk/*'|sed -e s#^refs/heads/##|tr '\n' ' ')"
+	fbpush = "!git push -v origin --force-with-lease $(git for-each-ref --format='%(refname)' 'refs/heads/mk'|sed -e s#^refs/heads/##|tr '\n' ' ')"
+	fbrm = "!git branch -D $(git for-each-ref --format='%(refname)' 'refs/heads/mk'|sed -e s#^refs/heads/##|tr '\n' ' ')"
 
 
 [color]
