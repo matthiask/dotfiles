@@ -48,6 +48,7 @@ Darwin*)
     ;;
 Linux*)
     alias xopen=xdg-open
+    alias code='flatpak run com.visualstudio.code'
     ;;
 esac
 
@@ -56,3 +57,4 @@ if grep -qi Microsoft /proc/version; then
     export DISPLAY=$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0
 fi
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
+alias mousespeed="gsettings set org.gnome.desktop.peripherals.mouse speed"
