@@ -58,3 +58,4 @@ if grep -qi Microsoft /proc/version; then
 fi
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 alias mousespeed="gsettings set org.gnome.desktop.peripherals.mouse speed"
+alias brightness="sudo ddcutil --display 1 setvcp 10"
