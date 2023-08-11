@@ -15,6 +15,7 @@ export PYTHONSTARTUP=~/_dotfiles/pythonstartup.py
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export GPG_TTY=$(tty)
+set -o vi
 
 alias m='venv/bin/python -Wonce manage.py'
 alias mds='venv/bin/python -Wonce manage.py runserver --traceback 0.0.0.0:8000'
