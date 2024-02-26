@@ -61,6 +61,7 @@
 [push]
 	default = matching
 	followTags = true
+	autopsetupremote = true
 
 [pull]
 	rebase = false
@@ -74,3 +75,18 @@
 
 [merge]
 	summary = true
+	conflictstyle = zdiff3
+[rebase]
+	autosquash = true
+[commit]
+	verbose = true
+[help]
+	autocorrect = 10
+[diff]
+	algorithm = histogram
+[branch]
+	sort = -committerdate
+[tag]
+	sort = -taggerdate
+[log]
+	date = iso
