@@ -1,4 +1,0 @@
-#!/bin/bash
-CMD=${1:-"start"}
-/etc/init.d/redis-server $CMD
-/etc/init.d/postgresql $CMD
