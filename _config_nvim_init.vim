@@ -7,7 +7,6 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'protesilaos/tempus-themes-vim'
 Plug 'christoomey/vim-tmux-navigator'
