@@ -84,8 +84,6 @@
 	autocorrect = 10
 [diff]
 	algorithm = histogram
-[branch]
-	sort = -committerdate
 [tag]
 	sort = -taggerdate
 [log]
