@@ -16,6 +16,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export GPG_TTY=$(tty)
 
+alias p='.venv/bin/python -Wonce'
 alias m='.venv/bin/python -Wonce manage.py'
 alias mds='.venv/bin/python -Wonce manage.py runserver --traceback 0.0.0.0:8000'
 alias fixdns='echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf'

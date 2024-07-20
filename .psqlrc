@@ -1,1 +1,7 @@
 \pset null 'Ø'
+\pset linestyle unicode
+\x auto
+\timing
+
+-- \set ECHO on
+-- \set ECHO_HIDDEN on
