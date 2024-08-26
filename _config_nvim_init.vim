@@ -9,6 +9,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'protesilaos/tempus-themes-vim'
+Plug 'jacoborus/tender.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
@@ -16,7 +17,8 @@ call plug#end()
 set termguicolors
 set background=dark
 let g:tempus_enforce_background_color=1
-colorscheme tempus_night
+" colorscheme tempus_night
+colorscheme tender
 
 if has('macunix')
     set directory=/tmp/
