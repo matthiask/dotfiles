@@ -56,7 +56,7 @@
 [user]
 	name = Matthias Kestenholz
 	email = mk@feinheit.ch
-	signingkey = 9344937529B41ED56141194C0C3F200EF349129F
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK12qAwMwCCXkdw4V/VzBiJ6JVqUw08IOmieuaHa5B7j
 
 [push]
 	default = matching
@@ -80,6 +80,7 @@
 	autosquash = true
 [commit]
 	verbose = true
+	gpgsign = true
 [help]
 	autocorrect = 10
 [diff]
@@ -88,3 +89,7 @@
 	sort = -taggerdate
 [log]
 	date = iso
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /opt/1Password/op-ssh-sign
