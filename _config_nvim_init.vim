@@ -8,17 +8,17 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'protesilaos/tempus-themes-vim'
-Plug 'jacoborus/tender.vim'
+" Plug 'protesilaos/tempus-themes-vim'
+" Plug 'jacoborus/tender.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
 set termguicolors
-set background=dark
-let g:tempus_enforce_background_color=1
+" set background=dark
+" let g:tempus_enforce_background_color=1
 " colorscheme tempus_night
-colorscheme tender
+" colorscheme tender
 
 if has('macunix')
     set directory=/tmp/
@@ -76,3 +76,15 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap Q <Nop>
+
+let t:light = 0
+function! ToggleLight()
+    if t:light == 0
+        :set background=light
+        let t:light = 1
+    else
+        :set background=dark
+        let t:light = 0
+    endif
+endfunction
+nnoremap <F12> :call ToggleLight()<CR>
