@@ -78,7 +78,7 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap Q <Nop>
 
 let t:light = 0
-function! ToggleLight()
+function! FiatLux()
     if t:light == 0
         :set background=light
         let t:light = 1
@@ -87,4 +87,4 @@ function! ToggleLight()
         let t:light = 0
     endif
 endfunction
-nnoremap <F12> :call ToggleLight()<CR>
+nnoremap <F12> :call FiatLux()<CR>
