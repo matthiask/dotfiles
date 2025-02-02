@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+
+rsync --progress  -e 'ssh -p23' -ru --delete ~/Music/ u445683@u445683.your-storagebox.de:Music/
+rsync --progress  -e 'ssh -p23' -ru --delete ~/Pictures/ u445683@u445683.your-storagebox.de:Pictures/
