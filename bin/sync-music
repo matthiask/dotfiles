@@ -1,0 +1,8 @@
+#!/bin/sh
+
+lftp << EOD
+open 192.168.178.81
+cd "foobar2000 Music Folder"
+lcd ~/Music/
+mirror -R --continue --delete --verbose -p
+EOD
