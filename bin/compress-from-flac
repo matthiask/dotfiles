@@ -4,36 +4,33 @@
 #   "mutagen",
 # ]
 # ///
-# from https://kristianfreeman.com/recursively-transcode-flac-to-mp3
+# from https://kristianfreeman.com/recursively-transcode-flac-to-compressed
 
 import os
 from pathlib import Path
 import subprocess
 from mutagen.flac import FLAC
 
-def convert_flac_to_mp3(flac_path):
+def convert_flac_to_compressed(flac_path):
     try:
         # Get the output MP3 path
-        mp3_path = str(flac_path).replace('.flac', '.mp3')
+        compressed_path = str(flac_path).replace('.flac', '.opus')
 
         # If MP3 already exists, skip
-        if os.path.exists(mp3_path):
-            print(f"MP3 already exists, skipping: {mp3_path}")
+        if os.path.exists(compressed_path):
+            print(f"MP3 already exists, skipping: {compressed_path}")
             return False
-
-        # Read FLAC metadata
-        flac_audio = FLAC(flac_path)
+        
+        # ffmpeg -i input.flac -c:a libopus -b:a 256k -vbr on -compression_level 10 -map_metadata 0 output.opus
 
         # Construct ffmpeg command with overwrite prevention
         cmd = [
             'ffmpeg',
             '-i', str(flac_path),
-            # '-ab', '320k',  # 320kbps bitrate
-            '-codec:a', 'libmp3lame', '-q:a', '0',  # Highest quality VBR
+            '-c:a', 'libopus', '-b:a', '256k', '-vbr', 'on', '-compression_level', '10', 
             '-map_metadata', '0',  # Copy metadata
-            '-id3v2_version', '3',  # Use ID3v2.3 tags
             '-n',  # Don't overwrite output files
-            mp3_path
+            compressed_path
         ]
 
         # Execute conversion
@@ -41,7 +38,7 @@ def convert_flac_to_mp3(flac_path):
 
         if result.returncode == 0:
             # Verify the MP3 file exists and has size > 0
-            if os.path.exists(mp3_path) and os.path.getsize(mp3_path) > 0:
+            if os.path.exists(compressed_path) and os.path.getsize(compressed_path) > 0:
                 print(f"Successfully converted: {flac_path}")
                 # Delete original FLAC file
                 # NOTE: Comment this out if you want to keep the original FLAC file
@@ -49,7 +46,7 @@ def convert_flac_to_mp3(flac_path):
                 print(f"Deleted original: {flac_path}")
                 return True
             else:
-                print(f"Conversion seemed successful but MP3 file is missing or empty: {mp3_path}")
+                print(f"Conversion seemed successful but MP3 file is missing or empty: {compressed_path}")
                 return False
         else:
             print(f"Error converting {flac_path}: {result.stderr}")
@@ -76,7 +73,7 @@ def main():
     successful_conversions = 0
     for flac_file in flac_files:
         print(f"\nProcessing: {flac_file}")
-        if convert_flac_to_mp3(flac_file):
+        if convert_flac_to_compressed(flac_file):
             successful_conversions += 1
 
     print(f"\nConversion complete. Successfully converted {successful_conversions} of {len(flac_files)} files.")
