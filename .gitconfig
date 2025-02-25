@@ -69,6 +69,8 @@
 
 [rerere]
 	default = matching
+	enabled = true
+	autoupdate = true
 
 [url "ssh://git@heroku.com/"]
 	insteadOf = https://git.heroku.com/
@@ -85,9 +87,16 @@
 	autocorrect = 1
 [diff]
 	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
 [tag]
-	sort = -taggerdate
+	sort = version:refname
 [log]
 	date = iso
 [gpg]
 	format = ssh
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
