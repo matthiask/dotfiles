@@ -98,5 +98,4 @@
 	format = ssh
 [fetch]
 	prune = true
-	pruneTags = true
 	all = true
