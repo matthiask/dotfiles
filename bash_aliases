@@ -59,3 +59,7 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 alias mousespeed="gsettings set org.gnome.desktop.peripherals.mouse speed"
 alias brightness="sudo ddcutil --display 1 setvcp 10"
 alias yt-audio='yt-dlp --embed-metadata --embed-thumbnail --audio-quality 0 -o "%(title)s.%(ext)s" -f bestaudio -x'
+
+function pdfcompress () {
+   gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pdfwrite -dCompatibilityLevel=1.3 -dPDFSETTINGS=/screen -dEmbedAllFonts=true -dSubsetFonts=true -dColorImageDownsampleType=/Bicubic -dColorImageResolution=144 -dGrayImageDownsampleType=/Bicubic -dGrayImageResolution=144 -dMonoImageDownsampleType=/Bicubic -dMonoImageResolution=144 -sOutputFile="$1.compressed.pdf" "$1"; 
+}
