@@ -98,4 +98,3 @@
 	format = ssh
 [fetch]
 	prune = true
-	all = true
