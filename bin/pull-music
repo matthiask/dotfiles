@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+
+rsync --progress  -e 'ssh -p23' -rvu --size-only --no-perms --no-times u445683@u445683.your-storagebox.de:Music/ ~/Music/

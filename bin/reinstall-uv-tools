@@ -1,0 +1,11 @@
+#!/bin/sh
+
+uv tool install action-updater --reinstall
+uv tool install hatch --reinstall
+uv tool install llm --with llm-anthropic --reinstall
+uv tool install pre-commit --with pre-commit-uv --reinstall
+uv tool install tox --reinstall
+uv tool install workbench-tst --reinstall
+
+uv tool install -e ~/projects/fh-fablib/
+uv tool install -e ~/projects/sites/traduire/cli/
