@@ -7,6 +7,7 @@
 
 import os
 import requests
+import itertools
 import time
 import json
 from pathlib import Path
@@ -117,10 +118,10 @@ def fetch_cover_art(artist_dir, album_dir, album_path, force=False):
     cover_path = os.path.join(album_path, "cover.jpg")
 
     variants = [
-        ".".join(lst for lst in itertools.product(
+        ".".join(lst) for lst in itertools.product(
             ["cover", "front", "folder", "Folder"],
             ["jpg", "png"],
-        ))
+        )
     ]
 
     # Skip if cover already exists and not forcing a refresh
