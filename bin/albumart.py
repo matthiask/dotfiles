@@ -116,8 +116,15 @@ def fetch_cover_art(artist_dir, album_dir, album_path, force=False):
     # Define output file path
     cover_path = os.path.join(album_path, "cover.jpg")
 
+    variants = [
+        ".".join(lst for lst in itertools.product(
+            ["cover", "front", "folder", "Folder"],
+            ["jpg", "png"],
+        ))
+    ]
+
     # Skip if cover already exists and not forcing a refresh
-    if os.path.exists(cover_path) and not force:
+    if not force and any(os.path.exists(os.path.join(album_path, v)) for v in variants):
         print(f"Cover already exists for {artist_dir} - {album_dir}")
         return True
 
