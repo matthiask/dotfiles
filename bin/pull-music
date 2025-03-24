@@ -1,4 +1,19 @@
 #!/bin/sh
 set -e
 
-rsync --progress  -e 'ssh -p23' -rvu --size-only --no-perms --no-times u445683@u445683.your-storagebox.de:Music/ ~/Music/
+DELETE_FLAG=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -d|--delete)
+      DELETE_FLAG="--delete"
+      shift
+      ;;
+    *)
+      echo "Unknown option: $1"
+      echo "Usage: $(basename "$0") [-d|--delete]"
+      exit 1
+      ;;
+  esac
+done
+
+rsync --progress -e 'ssh -p23' -rvu --size-only --no-perms --no-times $DELETE_FLAG u445683@u445683.your-storagebox.de:Music/ ~/Music/
