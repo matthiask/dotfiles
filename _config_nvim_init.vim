@@ -64,7 +64,7 @@ set noerrorbells
 set visualbell
 " set wildmenu
 " set wildmode=longest:full,full
-set pastetoggle=<F2>
+" set pastetoggle=<F2>
 
 " https://blog.erikwastaken.dev/posts/2023-05-06-a-case-for-neovim-without-plugins.html
 set statusline=%f%m%=%y\ 0x%B\ %l:%c\ %p%%
