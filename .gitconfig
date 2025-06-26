@@ -1,100 +1,101 @@
 [core]
-	logAllRefUpdates = true
+logAllRefUpdates = true
 
 [init]
-	defaultBranch = main
+defaultBranch = main
 
 [alias]
-	b = branch
-	ba = branch -av
-	bl = blame -C -C -C -n
-	ci = commit
-	cl = clone
-	co = checkout
-	cp = cherry-pick
-	d = diff -C
-	dc = diff --cached -C
-	dh = diff -C HEAD
-	ds = diff --stat -C
-	f = fetch
-	ff = pull --ff-only
-	fat = fetch --all --tags
-	g = grep -n
-	gg = grep -n -C3
-	l = log -C
-	lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(bold)%s%C(reset) %C(white)- %an%C(reset)%C(cyan)%d%C(reset)' --all
-	lp = log -p -C
-	m = merge
-	mainfix = remote set-head origin --auto
-	p = pull
-	pub = "!git push origin HEAD~0:refs/heads/\"$1\" #"
-	rb = rebase
-	rl = reflog
-	rp = remote prune
-	rpa = "!git remote | xargs -n1 git remote prune"
-	rpo = remote prune origin
-	s = show -C
-	sm = submodule
-	sms = submodule summary
-	smu = submodule update --init
-	ss = show --stat -C
-	st = status
-        sync = !git pull --no-edit && git push
-	tags = log --oneline --decorate --tags --no-walk
-	todo = grep -n -C3 -E '\\b(XXX|TODO|FIXME)\\b'
-	tst = log --since='01:00' --date='format:%H:%M' --reverse --pretty='format:tst stop %ad \"%s\"'
-	view = !gitk --all&
-	wh = log --no-merges @{1}..
-	whp = log -p -C --no-merges @{1}..
-	fbpush = "!git push -v origin --force-with-lease $(git for-each-ref --format='%(refname)' 'refs/heads/mk'|sed -e s#^refs/heads/##|tr '\n' ' ')"
-	fbrm = "!git branch -D $(git for-each-ref --format='%(refname)' 'refs/heads/mk'|sed -e s#^refs/heads/##|tr '\n' ' ')"
+b = branch
+ba = branch -av
+bd = branch -D
+bl = blame -C -C -C -n
+ci = commit
+cl = clone
+co = checkout
+cp = cherry-pick
+d = diff -C
+dc = diff --cached -C
+dh = diff -C HEAD
+ds = diff --stat -C
+f = fetch
+ff = pull --ff-only
+fat = fetch --all --tags
+g = grep -n
+gg = grep -n -C3
+l = log -C
+lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(bold)%s%C(reset) %C(white)- %an%C(reset)%C(cyan)%d%C(reset)' --all
+lp = log -p -C
+m = merge
+mainfix = remote set-head origin --auto
+p = pull
+pub = "!git push origin HEAD~0:refs/heads/\"$1\" #"
+rb = rebase
+rl = reflog
+rp = remote prune
+rpa = "!git remote | xargs -n1 git remote prune"
+rpo = remote prune origin
+s = show -C
+sm = submodule
+sms = submodule summary
+smu = submodule update --init
+ss = show --stat -C
+st = status
+sync = !git pull --no-edit && git push
+tags = log --oneline --decorate --tags --no-walk
+todo = grep -n -C3 -E '\\b(XXX|TODO|FIXME)\\b'
+tst = log --since='01:00' --date='format:%H:%M' --reverse --pretty='format:tst stop %ad \"%s\"'
+view = !gitk --all&
+wh = log --no-merges @{1}..
+whp = log -p -C --no-merges @{1}..
+fbpush = "!git push -v origin --force-with-lease $(git for-each-ref --format='%(refname)' 'refs/heads/mk'|sed -e s#^refs/heads/##|tr '\n' ' ')"
+fbrm = "!git branch -D $(git for-each-ref --format='%(refname)' 'refs/heads/mk'|sed -e s#^refs/heads/##|tr '\n' ' ')"
 
 
 [color]
-	ui = auto
+ui = auto
 
 [user]
-	name = Matthias Kestenholz
-	email = mk@feinheit.ch
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK12qAwMwCCXkdw4V/VzBiJ6JVqUw08IOmieuaHa5B7j
+name = Matthias Kestenholz
+email = mk@feinheit.ch
+signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK12qAwMwCCXkdw4V/VzBiJ6JVqUw08IOmieuaHa5B7j
 
 [push]
-	default = matching
-	followTags = true
-	autopsetupremote = true
+default = matching
+followTags = true
+autopsetupremote = true
 
 [pull]
-	rebase = false
-        # twohead = ort  # git 2.33
+rebase = false
+# twohead = ort  # git 2.33
 
 [rerere]
-	default = matching
-	enabled = true
-	autoupdate = true
+default = matching
+enabled = true
+autoupdate = true
 
 [url "ssh://git@heroku.com/"]
-	insteadOf = https://git.heroku.com/
+insteadOf = https://git.heroku.com/
 
 [merge]
-	summary = true
-	conflictstyle = zdiff3
+summary = true
+conflictstyle = zdiff3
 [rebase]
-	autosquash = true
+autosquash = true
 [commit]
-	verbose = true
-	gpgsign = true
+verbose = true
+gpgsign = true
 [help]
-	autocorrect = 1
+autocorrect = 1
 [diff]
-	algorithm = histogram
-	colorMoved = plain
-	mnemonicPrefix = true
-	renames = true
+algorithm = histogram
+colorMoved = plain
+mnemonicPrefix = true
+renames = true
 [tag]
-	sort = version:refname
+sort = version:refname
 [log]
-	date = iso
+date = iso
 [gpg]
-	format = ssh
+format = ssh
 [fetch]
-	prune = true
+prune = true
