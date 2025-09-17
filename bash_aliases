@@ -20,6 +20,9 @@ alias p='.venv/bin/python -Wonce'
 alias m='.venv/bin/python -Wonce manage.py'
 alias mds='.venv/bin/python -Wonce manage.py runserver --traceback 0.0.0.0:8000'
 alias fixdns='echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf'
+alias pri='prek install -f'
+alias pra='prek run -a'
+alias pru='prek autoupdate'
 
 function tm() {
     tmux -2 new-session -A -s "${1:-main}"
