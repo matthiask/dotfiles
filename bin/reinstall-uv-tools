@@ -3,7 +3,7 @@
 uv tool install action-updater --reinstall
 uv tool install hatch --reinstall
 uv tool install llm --with llm-anthropic --reinstall
-uv tool install pre-commit --with pre-commit-uv --reinstall
+uv tool install prek
 uv tool install tox --reinstall
 uv tool install workbench-tst --reinstall
 
