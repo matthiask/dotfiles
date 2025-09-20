@@ -23,6 +23,7 @@ alias fixdns='echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf'
 alias pri='prek install -f'
 alias pra='prek run -a'
 alias pru='prek autoupdate'
+alias pdc='podman-compose -f ~/projects/argocd/local/podman-compose.yml'
 
 function tm() {
     tmux -2 new-session -A -s "${1:-main}"
