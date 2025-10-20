@@ -1,11 +1,12 @@
 #!/bin/sh
 set -e
+mkdir -p ~/Downloads/Music
 
 lftp << EOD
 open $1
 cd "foobar2000 Music Folder"
 cd "Local"
-lcd ~/Downloads/
+lcd ~/Downloads/Music
 mirror --continue --verbose -p --ignore-time"
 cd "../X1"
 lcd ~/Music/
