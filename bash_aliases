@@ -37,8 +37,6 @@ function srv() {
     python3 -m http.server "${1:-8001}"
 }
 
-. /usr/share/bash-completion/completions/git
-
 case "$(uname -s)" in
 Darwin*)
     alias xopen=open
@@ -48,20 +46,40 @@ Darwin*)
     alias l='ls -CF'
     export PGDATA=/usr/local/var/postgres
     function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
+    # Load bash completion if available (via Homebrew)
+    if [ -f /opt/homebrew/etc/bash_completion ]; then
+        . /opt/homebrew/etc/bash_completion
+    elif [ -f /usr/local/etc/bash_completion ]; then
+        . /usr/local/etc/bash_completion
+    fi
+
+    # from https://dev.to/jameson/bash-completion-for-git-on-mac-os-x-monterrey-3imd
+    xcode_dev_dir='/Applications/Xcode.app/Contents/Developer'
+    git_core="$xcode_dev_dir/usr/share/git-core"
+    git_completion="$git_core/git-completion.bash"
+    [ -x "$(which git)" ] && \
+        [ -f "$git_completion" ] && \
+        source "$git_completion"
+
     ;;
 Linux*)
     alias xopen=xdg-open
     alias code='flatpak run com.visualstudio.code'
+    alias mousespeed="gsettings set org.gnome.desktop.peripherals.mouse speed"
+    alias brightness="sudo ddcutil --display 1 setvcp 10"
+    # Load bash completion
+    if [ -f /usr/share/bash-completion/completions/git ]; then
+        . /usr/share/bash-completion/completions/git
+    fi
+    # WSL detection
+    if [ -f /proc/version ] && grep -qi Microsoft /proc/version; then
+        umask 002
+        export DISPLAY=$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0
+    fi
     ;;
 esac
 
-if grep -qi Microsoft /proc/version; then
-    umask 002
-    export DISPLAY=$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0
-fi
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
-alias mousespeed="gsettings set org.gnome.desktop.peripherals.mouse speed"
-alias brightness="sudo ddcutil --display 1 setvcp 10"
 alias yt-audio='uvx "yt-dlp[default]" --embed-metadata --embed-thumbnail --audio-quality 0 -o "%(title)s.%(ext)s" -f bestaudio -x'
 
 function pdfcompress () {
