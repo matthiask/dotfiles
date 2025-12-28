@@ -61,6 +61,21 @@ Darwin*)
         [ -f "$git_completion" ] && \
         source "$git_completion"
 
+    # https://gist.github.com/aliang/1024466
+    _complete_ssh_hosts ()
+    {
+            COMPREPLY=()
+            cur="${COMP_WORDS[COMP_CWORD]}"
+            comp_ssh_hosts=`cat ~/.ssh/config | \
+                             grep --color=never "^Host " | \
+                             awk '{print $2}'
+                       `
+            COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
+            return 0
+    }
+    complete -F _complete_ssh_hosts ssh
+    complete -f -F __complete_ssh_host scp
+
     ;;
 Linux*)
     alias xopen=xdg-open
