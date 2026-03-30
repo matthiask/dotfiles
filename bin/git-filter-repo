@@ -154,6 +154,9 @@ def glob_to_regex(glob_bytestr):
     regex = regex[0:-7]
   elif regex.startswith(r'(?s:') and regex.endswith(r')\Z'): # pragma: no cover
     regex = regex[4:-3]
+  elif regex.startswith(r'(?s:') and regex.endswith(r')\z'): # pragma: no cover
+    # Yaay, python3.14 for senselessly duplicating \Z as \z...
+    regex = regex[4:-3]
 
   # Finally, convert back to regex operating on bytestr
   return regex.encode()
@@ -1110,7 +1113,7 @@ class FastExportParser(object):
         idnum = idnum[1:]
       path = path.rstrip(b'\n')
       # Check for LFS objects from sources before we might toss this filechange
-      if self._lfs_object_tracker:
+      if mode != b'160000' and self._lfs_object_tracker:
         value = int(idnum) if len(idnum) != 40 else idnum
         self._lfs_object_tracker.check_file_change_data(value, True)
       # We translate the idnum to our id system
@@ -1683,14 +1686,14 @@ class GitUtils(object):
   def get_config_settings(repo_working_dir):
     output = ''
     try:
-      output = subproc.check_output('git config --list'.split(),
+      output = subproc.check_output('git config --list --null'.split(),
                                     cwd=repo_working_dir)
     except subprocess.CalledProcessError as e: # pragma: no cover
       raise SystemExit('fatal: {}'.format(e))
 
     # FIXME: Ignores multi-valued keys, just let them overwrite for now
-    return dict(line.split(b'=', maxsplit=1)
-                for line in output.strip().split(b"\n"))
+    return dict(item.split(b'\n', maxsplit=1)
+                for item in output.strip().split(b"\0") if item)
 
   @staticmethod
   def get_blob_sizes(quiet = False):
@@ -2307,6 +2310,12 @@ EXAMPLES
       if b'--combined-all-paths' not in output:
         # We need a version of git-diff-tree with --combined-all-paths
         raise SystemExit(_("Error: need git >= 2.22.0"))
+    if args.sensitive_data_removal:
+      p = subproc.Popen('git cat-file -h'.split(),
+                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+      output = p.stdout.read()
+      if b"--batch-command" not in output: # pragma: no cover
+        raise SystemExit(_("Error: need git >= 2.36.0"))
     # End of sanity checks on git version
     if args.max_blob_size:
       suffix = args.max_blob_size[-1]
@@ -2897,7 +2906,7 @@ class RepoAnalyze(object):
 
     if os.path.isdir(reportdir):
       if args.force:
-        sys.stdout.write(_("Warning: Removing recursively: \"%s\"") % decode(reportdir))
+        sys.stdout.write(_("Warning: Removing recursively: \"%s\"\n") % decode(reportdir))
         shutil.rmtree(reportdir)
       else:
         sys.stdout.write(_("Error: dir already exists (use --force to delete): \"%s\"\n") % decode(reportdir))
@@ -2909,10 +2918,11 @@ class RepoAnalyze(object):
     stats = RepoAnalyze.gather_data(args)
 
     # Write the reports
-    sys.stdout.write(_("Writing reports to %s...") % decode(reportdir))
+    sys.stdout.write(_("Writing reports to \"%s\"...") % decode(reportdir))
     sys.stdout.flush()
     RepoAnalyze.write_report(reportdir, stats)
     sys.stdout.write(_("done.\n"))
+    sys.stdout.write(_("README: \"%s\"\n") % decode( os.path.join(reportdir, b"README") ))
 
 class FileInfoValueHelper:
   def __init__(self, replace_text, insert_blob_func, source_working_dir):
@@ -3033,7 +3043,8 @@ class LFSObjectTracker:
       self.check_blob_data(obj.data, obj.id, False)
     elif type(obj) == Commit:
       for change in obj.file_changes:
-        if change.type != b'M':
+        sys.stdout.flush()
+        if change.type != b'M' or change.mode == b'160000':
           continue
         self.check_file_change_data(change.blob_id, False)
 
@@ -4449,7 +4460,7 @@ class RepoFilter(object):
       ret = subproc.call([arg if arg != '""' else '' for arg in cmd.split()],
                          cwd=source_working_dir)
       if ret != 0: # pragma: no cover
-        m = _("WARNING: Fetching all refs from origin failed")
+        m = _("Warning: Fetching all refs from origin failed")
         print(m)
     if self._args.sensitive_data_removal:
       return
@@ -4624,6 +4635,7 @@ class RepoFilter(object):
         if not new_refs_initialized:
           target_working_dir = self._args.target or b'.'
           new_refs = GitUtils.get_refs(target_working_dir)
+          new_refs_initialized = True
         if refname in new_refs:
           new_hash = new_refs[refname]
         else:
@@ -4633,6 +4645,7 @@ class RepoFilter(object):
       if not new_refs_initialized:
         target_working_dir = self._args.target or b'.'
         new_refs = GitUtils.get_refs(target_working_dir)
+        new_refs_initialized = True
       for ref, new_hash in new_refs.items():
         if ref not in orig_refs and not ref.startswith(b'refs/replace/'):
           old_hash = b'0'*len(new_hash)
