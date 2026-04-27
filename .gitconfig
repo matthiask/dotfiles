@@ -84,8 +84,6 @@ autosquash = true
 [commit]
 verbose = true
 gpgsign = true
-[help]
-autocorrect = 1
 [diff]
 algorithm = histogram
 colorMoved = plain
