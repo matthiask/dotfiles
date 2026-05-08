@@ -91,6 +91,8 @@ Linux*)
         export DISPLAY=$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0
     fi
     ;;
+    alias ls=lsd
+    alias cat='bat -p'
 esac
 
 export NVIM_TUI_ENABLE_TRUE_COLOR=1

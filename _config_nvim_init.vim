@@ -29,7 +29,13 @@ set backupcopy=yes " for webpack-dev-server
 set mouse=a
 
 set wildignore+=*/tmp/*,*.pyc,*.mo,*.whl
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+else
+  let g:ctrlp_clear_cache_on_exit = 0
+endif
 
 " Triger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
