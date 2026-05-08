@@ -81,6 +81,8 @@ Linux*)
     alias code='flatpak run com.visualstudio.code'
     alias mousespeed="gsettings set org.gnome.desktop.peripherals.mouse speed"
     alias brightness="sudo ddcutil --display 1 setvcp 10"
+    alias ls=lsd
+    alias cat='bat -p'
     # Load bash completion
     if [ -f /usr/share/bash-completion/completions/git ]; then
         . /usr/share/bash-completion/completions/git
@@ -91,8 +93,6 @@ Linux*)
         export DISPLAY=$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0
     fi
     ;;
-    alias ls=lsd
-    alias cat='bat -p'
 esac
 
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
