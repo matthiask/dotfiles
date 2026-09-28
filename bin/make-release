@@ -177,14 +177,18 @@ def main():
     name = pyproject["project"]["name"]
     if "version" in pyproject["project"]:
         version_file = root / "pyproject.toml"
-        pattern = r'(?ms)(^\[project\].*?^version = ")([^"]+)(")'
+        pattern = r'(?s)^\[project\].*?^version = "(?P<version>[^"]+)"'
     else:
-        version_file = root / pyproject["tool"]["hatch"]["version"]["path"]
-        pattern = r'(?m)(^__version__ = ")([^"]+)(")'
+        hatch = pyproject["tool"]["hatch"]["version"]
+        version_file = root / hatch["path"]
+        # hatchling's default pattern
+        pattern = hatch.get("pattern") or (
+            r"(?i)^(__version__|VERSION) *= *([\'\"])v?(?P<version>.+?)\2"
+        )
     version_source = version_file.read_text()
-    if not (m := re.search(pattern, version_source)):
+    if not (m := re.search(pattern, version_source, re.MULTILINE)):
         sys.exit(f"No version found in {version_file}")
-    file_version = Version.parse(m[2])
+    file_version = Version.parse(m["version"])
 
     def version_tags(*args):
         tags = git("tag", *args).splitlines()
@@ -194,7 +198,7 @@ def main():
     current = max(tags, default=file_version)
     if current != file_version:
         print(
-            f"Warning: {version_file.name} says {m[2]}, not {current.full()}.",
+            f"Warning: {version_file.name} says {m['version']}, not {current.full()}.",
             file=sys.stderr,
         )
 
@@ -218,9 +222,8 @@ def main():
         sys.exit(f"A tag for {new.short()} exists already.")
 
     originals = {path: path.read_text() for path in [version_file, changelog]}
-    version_file.write_text(
-        re.sub(pattern, rf"\g<1>{new.full()}\g<3>", version_source, count=1)
-    )
+    start, end = m.span("version")
+    version_file.write_text(version_source[:start] + new.full() + version_source[end:])
     changelog.write_text(changelog_text)
 
     files = [str(path) for path in originals]
