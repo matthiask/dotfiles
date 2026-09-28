@@ -1,0 +1,268 @@
+#!/usr/bin/env python3
+"""
+Release a new version of the Python package in the current git repository.
+
+    make-release patch|minor|major    bump the latest version tag
+    make-release 5.0a1                set an explicit version
+    make-release                      use the version announced in the changelog
+
+The current version is the latest version tag reachable from HEAD. The new
+version is written to pyproject.toml or to [tool.hatch.version] path.
+
+CHANGELOG.rst or CHANGELOG.md must contain exactly one "Next version" or
+"Unreleased" heading; the dated heading for the release is inserted below it.
+A heading directly below it ("6.1" or "6.1 (unreleased)") announces the
+version and is replaced by the dated heading.
+
+After showing the diff, the changes are committed, tagged (signed) and pushed.
+Final versions are written as 6.0.0; the changelog, commit message and tag use
+6.0 for x.y.0 releases.
+"""
+
+import argparse
+import datetime
+import re
+import subprocess
+import sys
+import tomllib
+from pathlib import Path
+from typing import NamedTuple
+
+
+VERSION_RE = re.compile(r"v?(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:(a|b|rc)(\d+))?")
+MARKERS = {"Next version", "Unreleased"}
+
+
+class Version(NamedTuple):
+    major: int
+    minor: int
+    patch: int
+    pre: str = "z"  # "z" sorts final releases after a, b and rc
+    prenum: int = 0
+
+    @classmethod
+    def parse(cls, value):
+        if not (m := VERSION_RE.fullmatch(value)):
+            sys.exit(f"Invalid version: {value!r}")
+        major, minor, patch, pre, prenum = m.groups()
+        return cls(
+            int(major), int(minor or 0), int(patch or 0), pre or "z", int(prenum or 0)
+        )
+
+    def bump(self, kind):
+        # Bumping a pre-release to its own level finalizes it: 5.0a2 → 5.0.0
+        if self.pre != "z" and (
+            kind == "patch"
+            or (kind == "minor" and not self.patch)
+            or (kind == "major" and not self.minor and not self.patch)
+        ):
+            return self._replace(pre="z", prenum=0)
+        if kind == "major":
+            return Version(self.major + 1, 0, 0)
+        if kind == "minor":
+            return Version(self.major, self.minor + 1, 0)
+        return Version(self.major, self.minor, self.patch + 1)
+
+    def short(self):  # 6.0, 6.0.2, 5.0a1
+        patch = f".{self.patch}" if self.patch else ""
+        pre = f"{self.pre}{self.prenum}" if self.pre != "z" else ""
+        return f"{self.major}.{self.minor}{patch}{pre}"
+
+    def full(self):  # 6.0.0, 6.0.2, 5.0a1
+        return (
+            self.short()
+            if self.pre != "z"
+            else f"{self.major}.{self.minor}.{self.patch}"
+        )
+
+
+def git(*args):
+    return subprocess.run(
+        ["git", *args], check=True, capture_output=True, text=True
+    ).stdout.strip()
+
+
+def update_changelog(path, version, today):
+    """Return ``(version, text)``, ``version`` defaults to the announced one."""
+    lines = path.read_text().splitlines()
+    rst = path.suffix == ".rst"
+
+    def heading(i):  # Returns (text, style, number of lines) or None
+        if i >= len(lines):
+            return None
+        if rst:
+            if (
+                i + 1 < len(lines)
+                and re.fullmatch(r"([=~^-])\1*", lines[i + 1])
+                and len(lines[i]) == len(lines[i + 1])
+            ):
+                return lines[i], lines[i + 1][0], 2
+        elif m := re.fullmatch(r"(#+) (.+)", lines[i]):
+            return m[2], m[1], 1
+        return None
+
+    markers = [i for i in range(len(lines)) if (h := heading(i)) and h[0] in MARKERS]
+    if len(markers) != 1:
+        sys.exit(f"Expected one 'Next version' or 'Unreleased' heading in {path.name}")
+    _text, style, size = heading(markers[0])
+    at = markers[0] + size
+
+    # Is a version announced directly below the marker?
+    announced = None
+    j = next((j for j in range(at, len(lines)) if lines[j].strip()), len(lines))
+    if (h := heading(j)) and (
+        m := re.fullmatch(rf"({VERSION_RE.pattern})(?: \(unreleased\))?", h[0])
+    ):
+        announced = Version.parse(m[1])
+    version = version or announced
+    if not version:
+        sys.exit(f"{path.name} doesn't announce a version, specify it.")
+    if announced and announced != version:
+        sys.exit(f"{path.name} announces {announced.short()}, not {version.short()}.")
+
+    title = f"{version.short()} ({today})"
+    new = [title, style * len(title)] if rst else [f"{style} {title}"]
+    if announced:
+        lines[j : j + h[2]] = new
+        at = j + len(new)
+    else:
+        lines[at:at] = ["", *new]
+        at += 1 + len(new)
+        if at < len(lines) and lines[at].strip():
+            lines.insert(at, "")
+
+    rest = [line for line in lines[at:] if line.strip()]
+    if not rest or not re.match(r"[-*] ", rest[0]):
+        print(f"Warning: The new section in {path.name} looks empty.", file=sys.stderr)
+    return version, "\n".join(lines) + "\n"
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument("version", nargs="?", help="major, minor, patch or a version")
+    parser.add_argument(
+        "-n", "--dry-run", action="store_true", help="only show the diff"
+    )
+    parser.add_argument(
+        "-y", "--yes", action="store_true", help="don't ask, just release"
+    )
+    args = parser.parse_args()
+
+    root = Path(git("rev-parse", "--show-toplevel"))
+
+    # Releasing from an outdated branch fails when pushing, after tagging
+    if not (branch := git("branch", "--show-current")):
+        sys.exit("Not on a branch.")
+    git("fetch", "--quiet", "origin")
+    if subprocess.run(
+        ["git", "rev-parse", "--quiet", "--verify", f"origin/{branch}"],
+        capture_output=True,
+    ).returncode:
+        sys.exit(f"origin/{branch} doesn't exist.")
+    ahead, behind = map(
+        int,
+        git("rev-list", "--left-right", "--count", f"HEAD...origin/{branch}").split(),
+    )
+    if behind:
+        sys.exit(
+            f"{branch} is {behind} commit(s) behind origin/{branch}"
+            + (f" and {ahead} ahead" if ahead else "")
+            + ", pull first."
+        )
+    if ahead:
+        print(f"Note: {ahead} unpushed commit(s) will be pushed too.", file=sys.stderr)
+    pyproject = tomllib.loads((root / "pyproject.toml").read_text())
+    name = pyproject["project"]["name"]
+    if "version" in pyproject["project"]:
+        version_file = root / "pyproject.toml"
+        pattern = r'(?ms)(^\[project\].*?^version = ")([^"]+)(")'
+    else:
+        version_file = root / pyproject["tool"]["hatch"]["version"]["path"]
+        pattern = r'(?m)(^__version__ = ")([^"]+)(")'
+    version_source = version_file.read_text()
+    if not (m := re.search(pattern, version_source)):
+        sys.exit(f"No version found in {version_file}")
+    file_version = Version.parse(m[2])
+
+    def version_tags(*args):
+        tags = git("tag", *args).splitlines()
+        return {Version.parse(tag): tag for tag in tags if VERSION_RE.fullmatch(tag)}
+
+    tags = version_tags("--merged", "HEAD")
+    current = max(tags, default=file_version)
+    if current != file_version:
+        print(
+            f"Warning: {version_file.name} says {m[2]}, not {current.full()}.",
+            file=sys.stderr,
+        )
+
+    changelogs = [
+        p for p in [root / "CHANGELOG.rst", root / "CHANGELOG.md"] if p.exists()
+    ]
+    if len(changelogs) != 1:
+        sys.exit("Expected exactly one of CHANGELOG.rst and CHANGELOG.md")
+    changelog = changelogs[0]
+
+    if args.version in {"major", "minor", "patch"}:
+        new = current.bump(args.version)
+    else:
+        new = Version.parse(args.version) if args.version else None
+    new, changelog_text = update_changelog(changelog, new, datetime.date.today())
+    if new <= current:
+        sys.exit(f"{new.full()} isn't newer than {current.full()}.")
+    tag = ("v" if tags.get(current, "").startswith("v") else "") + new.short()
+    message = f"{name} {new.short()}"
+    if new in version_tags():
+        sys.exit(f"A tag for {new.short()} exists already.")
+
+    originals = {path: path.read_text() for path in [version_file, changelog]}
+    version_file.write_text(
+        re.sub(pattern, rf"\g<1>{new.full()}\g<3>", version_source, count=1)
+    )
+    changelog.write_text(changelog_text)
+
+    files = [str(path) for path in originals]
+    print(f"Releasing {name} {current.full()} → {new.full()} (tag {tag})\n", flush=True)
+    subprocess.run(["git", "--no-pager", "diff", "HEAD", "--", *files])
+
+    def revert(message):
+        for path, content in originals.items():
+            path.write_text(content)
+        sys.exit(message)
+
+    def run(*args):
+        return subprocess.run(["git", *args]).returncode == 0
+
+    if args.dry_run:
+        revert(None)
+    prompt = (
+        f"\n{message!r}: [y] commit, tag and push  [c] commit and tag  [n] revert? "
+    )
+    try:
+        answer = "y" if args.yes else input(prompt).strip().lower()
+    except (EOFError, KeyboardInterrupt):
+        answer = "n"
+    if answer not in {"y", "c"}:
+        revert("Reverted the changes.")
+
+    if not run("commit", "-m", message, "--", *files):
+        revert("Committing failed, reverted the changes.")
+    if not run("tag", "-s", "-m", message, tag):
+        run("reset", "--quiet", "--soft", "HEAD~1")
+        run("restore", "--staged", "--", *files)
+        revert("Tagging failed, reverted the commit and the changes.")
+    push = f"git push --atomic origin HEAD refs/tags/{tag}"
+    if answer == "y" and not run(*push.split()[1:]):
+        sys.exit(
+            f"Pushing failed. Retry using: {push}\n"
+            f"Or undo using: git tag -d {tag} && git reset --keep HEAD~1"
+        )
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except subprocess.CalledProcessError as exc:
+        sys.exit(exc.stderr.strip() or str(exc))
