@@ -4,3 +4,4 @@
 .DS_Store
 *.sw?
 /.tmux/plugins
+__pycache__
