@@ -4,7 +4,10 @@ Release a new version of the Python package in the current git repository.
 
     make-release patch|minor|major    bump the latest version tag
     make-release 5.0a1                set an explicit version
-    make-release                      use the version announced in the changelog
+    make-release                      show the current version and ask
+
+When asking, the version announced in the changelog is the default. With --yes
+or without a terminal, the announced version is used without asking.
 
 The current version is the latest version tag reachable from HEAD. The new
 version is written to pyproject.toml or to [tool.hatch.version] path.
@@ -31,6 +34,7 @@ from typing import NamedTuple
 
 VERSION_RE = re.compile(r"v?(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:(a|b|rc)(\d+))?")
 MARKERS = {"Next version", "Unreleased"}
+BUMPS = ("major", "minor", "patch")
 
 
 class Version(NamedTuple):
@@ -82,8 +86,9 @@ def git(*args):
     ).stdout.strip()
 
 
-def update_changelog(path, version, today):
-    """Return ``(version, text)``, ``version`` defaults to the announced one."""
+def update_changelog(path, version, today, ask=None):
+    """Return ``(version, text)``, ``version`` defaults to ``ask(announced)``
+    or to the announced one."""
     lines = path.read_text().splitlines()
     rst = path.suffix == ".rst"
 
@@ -114,6 +119,8 @@ def update_changelog(path, version, today):
         m := re.fullmatch(rf"({VERSION_RE.pattern})(?: \(unreleased\))?", h[0])
     ):
         announced = Version.parse(m[1])
+    if not version and ask:
+        version = ask(announced)
     version = version or announced
     if not version:
         sys.exit(f"{path.name} doesn't announce a version, specify it.")
@@ -209,11 +216,42 @@ def main():
         sys.exit("Expected exactly one of CHANGELOG.rst and CHANGELOG.md")
     changelog = changelogs[0]
 
-    if args.version in {"major", "minor", "patch"}:
+    def ask(announced):
+        print(
+            f"Current version: {current.short()}"
+            + (f", {changelog.name} announces {announced.short()}" if announced else "")
+        )
+        bumps = ", ".join(f"{kind} → {current.bump(kind).short()}" for kind in BUMPS)
+        default = f" [{announced.short()}]" if announced else ""
+        while True:
+            try:
+                answer = input(f"New version ({bumps}, or a version){default}: ")
+            except (EOFError, KeyboardInterrupt):
+                sys.exit("\nAborted.")
+            if not (answer := answer.strip().lower()) and announced:
+                return announced
+            if answer in BUMPS:
+                new = current.bump(answer)
+            elif VERSION_RE.fullmatch(answer):
+                new = Version.parse(answer)
+            else:
+                print(f"Invalid version: {answer!r}")
+                continue
+            if new <= current:
+                print(f"{new.full()} isn't newer than {current.full()}.")
+            elif announced and new != announced:
+                print(f"{changelog.name} announces {announced.short()}.")
+            else:
+                return new
+
+    if args.version in BUMPS:
         new = current.bump(args.version)
     else:
         new = Version.parse(args.version) if args.version else None
-    new, changelog_text = update_changelog(changelog, new, datetime.date.today())
+    interactive = not args.yes and sys.stdin.isatty()
+    new, changelog_text = update_changelog(
+        changelog, new, datetime.date.today(), ask=ask if interactive else None
+    )
     if new <= current:
         sys.exit(f"{new.full()} isn't newer than {current.full()}.")
     tag = ("v" if tags.get(current, "").startswith("v") else "") + new.short()
