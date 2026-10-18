@@ -60,9 +60,8 @@ email = mk@feinheit.ch
 signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK12qAwMwCCXkdw4V/VzBiJ6JVqUw08IOmieuaHa5B7j
 
 [push]
-default = matching
-followTags = true
-autopsetupremote = true
+	default = simple
+	autoSetupRemote = true
 
 [pull]
 rebase = false
