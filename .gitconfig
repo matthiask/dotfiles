@@ -60,7 +60,7 @@ email = mk@feinheit.ch
 signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK12qAwMwCCXkdw4V/VzBiJ6JVqUw08IOmieuaHa5B7j
 
 [push]
-	default = simple
+	default = matching
 	autoSetupRemote = true
 
 [pull]
@@ -96,3 +96,8 @@ date = iso
 format = ssh
 [fetch]
 prune = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
