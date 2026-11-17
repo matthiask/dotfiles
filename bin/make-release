@@ -17,6 +17,11 @@ CHANGELOG.rst or CHANGELOG.md must contain exactly one "Next version" or
 A heading directly below it ("6.1" or "6.1 (unreleased)") announces the
 version and is replaced by the dated heading.
 
+A package in a subdirectory of the repository (with its own pyproject.toml
+and changelog) is released from that directory, or with --package DIR. Its
+tags are prefixed with the directory's name (cli-1.0), its versions are
+counted separately from the repository's other packages.
+
 After showing the diff, the changes are committed, tagged (signed) and pushed.
 Final versions are written as 6.0.0; the changelog, commit message and tag use
 6.0 for x.y.0 releases.
@@ -153,11 +158,30 @@ def main():
         "-n", "--dry-run", action="store_true", help="only show the diff"
     )
     parser.add_argument(
+        "-p",
+        "--package",
+        help="the package's directory (default: the nearest pyproject.toml)",
+    )
+    parser.add_argument(
+        "--tag-prefix",
+        help="default: DIR- for a package in a subdirectory, none otherwise",
+    )
+    parser.add_argument(
         "-y", "--yes", action="store_true", help="don't ask, just release"
     )
     args = parser.parse_args()
 
-    root = Path(git("rev-parse", "--show-toplevel"))
+    top = Path(git("rev-parse", "--show-toplevel")).resolve()
+    if args.package:
+        root = Path(args.package).resolve()
+    else:
+        root = Path.cwd().resolve()
+        while root != top and not (root / "pyproject.toml").exists():
+            root = root.parent
+    if not root.is_relative_to(top) or not (root / "pyproject.toml").exists():
+        sys.exit(f"No pyproject.toml in {root}")
+    if (prefix := args.tag_prefix) is None:
+        prefix = "" if root == top else "-".join(root.relative_to(top).parts) + "-"
 
     # Releasing from an outdated branch fails when pushing, after tagging
     if not (branch := git("branch", "--show-current")):
@@ -199,7 +223,11 @@ def main():
 
     def version_tags(*args):
         tags = git("tag", *args).splitlines()
-        return {Version.parse(tag): tag for tag in tags if VERSION_RE.fullmatch(tag)}
+        return {
+            Version.parse(tag.removeprefix(prefix)): tag
+            for tag in tags
+            if tag.startswith(prefix) and VERSION_RE.fullmatch(tag.removeprefix(prefix))
+        }
 
     tags = version_tags("--merged", "HEAD")
     current = max(tags, default=file_version)
@@ -254,7 +282,8 @@ def main():
     )
     if new <= current:
         sys.exit(f"{new.full()} isn't newer than {current.full()}.")
-    tag = ("v" if tags.get(current, "").startswith("v") else "") + new.short()
+    v = "v" if tags.get(current, "").removeprefix(prefix).startswith("v") else ""
+    tag = prefix + v + new.short()
     message = f"{name} {new.short()}"
     if new in version_tags():
         sys.exit(f"A tag for {new.short()} exists already.")
