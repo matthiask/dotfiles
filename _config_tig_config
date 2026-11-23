@@ -1,0 +1,5 @@
+# The default cursor is white on green, unreadable with a bright green.
+color cursor black green bold
+set line-graphics = utf-8
+# The cursor of the backgrounded view (main view while the diff is open).
+color cursor-blur black green
